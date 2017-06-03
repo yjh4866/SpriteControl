@@ -138,10 +138,10 @@
 - (void)setNormalBlock:(void (^)(SKButton *skButton))blockNormal
         touchDownBlock:(void (^)(SKButton *skButton))blockTouchDown
 {
-    [self setAction:[SKAction runBlock:^{blockTouchDown(self);}]
+    [self setAction:[SKAction runBlock:^{if(blockTouchDown)blockTouchDown(self);}]
     forControlEvent:SKCtrlEvent_TouchDown];
-    [self setAction:[SKAction runBlock:^{blockNormal(self);}] forControlEvent:SKCtrlEvent_TouchUpInside];
-    [self setAction:[SKAction runBlock:^{blockNormal(self);}] forControlEvent:SKCtrlEvent_TouchUpOutside];
+    [self setAction:[SKAction runBlock:^{if(blockNormal)blockNormal(self);}] forControlEvent:SKCtrlEvent_TouchUpInside];
+    [self setAction:[SKAction runBlock:^{if(blockNormal)blockNormal(self);}] forControlEvent:SKCtrlEvent_TouchUpOutside];
 }
 
 
