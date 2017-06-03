@@ -136,6 +136,7 @@
 				TargetAttributes = {
 					B133EC651E1D2ACD00AFC65C = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = Y3UD3PVDBM;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -300,6 +301,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = Y3UD3PVDBM;
 				INFOPLIST_FILE = SpriteControl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.1JiaGame.SpriteControl;
@@ -311,6 +313,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = Y3UD3PVDBM;
 				INFOPLIST_FILE = SpriteControl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.1JiaGame.SpriteControl;

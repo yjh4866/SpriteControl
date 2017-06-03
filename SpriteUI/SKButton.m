@@ -37,6 +37,11 @@
     return [[SKButton alloc] initWithSize:CGSizeMake(100, 100) andSprite:nil];
 }
 
+- (void)dealloc
+{
+    
+}
+
 
 // 用SKSpriteNode实例化一个按钮
 - (instancetype)initWithSize:(CGSize)size andSprite:(SKSpriteNode *)spriteNode
@@ -70,6 +75,15 @@
         [self initTextAndAction];
     }
     return self;
+}
+- (void)setNormalImageNamed:(NSString *)normalImageNamed
+        touchDownImageNamed:(NSString *)touchDownImageNamed
+{
+    [self setNormalBlock:^(SKButton *skButton){
+        skButton.spriteNode.texture = [SKTexture textureWithImageNamed:normalImageNamed];
+    } touchDownBlock:^(SKButton *skButton){
+        skButton.spriteNode.texture = [SKTexture textureWithImageNamed:touchDownImageNamed];
+    }];
 }
 
 
@@ -118,6 +132,16 @@
         self.textLabel.text = text;
     }
     return self;
+}
+
+
+- (void)setNormalBlock:(void (^)(SKButton *skButton))blockNormal
+        touchDownBlock:(void (^)(SKButton *skButton))blockTouchDown
+{
+    [self setAction:[SKAction runBlock:^{blockTouchDown(self);}]
+    forControlEvent:SKCtrlEvent_TouchDown];
+    [self setAction:[SKAction runBlock:^{blockNormal(self);}] forControlEvent:SKCtrlEvent_TouchUpInside];
+    [self setAction:[SKAction runBlock:^{blockNormal(self);}] forControlEvent:SKCtrlEvent_TouchUpOutside];
 }
 
 

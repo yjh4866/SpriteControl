@@ -67,14 +67,11 @@
     {
         SKButton *button = [[SKButton alloc] initWithSize:CGSizeMake(100, 100) andRadius:50];
         button.shapeNode.fillColor = Color_Red;
-        [button setAction:[SKAction runBlock:^(){button.shapeNode.fillColor=Color_Blue;}]
-           forControlEvent:SKCtrlEvent_TouchDown];
-        [button setAction:[SKAction runBlock:^(){button.shapeNode.fillColor=Color_Red;}]
-           forControlEvent:SKCtrlEvent_TouchUpInside];
-        [button setAction:[SKAction runBlock:^(){button.shapeNode.fillColor=Color_Red;}]
-           forControlEvent:SKCtrlEvent_TouchUpOutside];
-        [button setAction:[SKAction runBlock:^(){button.shapeNode.fillColor=Color_Red;}]
-           forControlEvent:SKCtrlEvent_TouchCancel];
+        [button setNormalBlock:^(SKButton *skButton) {
+            skButton.shapeNode.fillColor=Color_Red;
+        } touchDownBlock:^(SKButton *skButton) {
+            skButton.shapeNode.fillColor=Color_Blue;
+        }];
         button.position = CGPointMake(-self.size.width/4, 0);
         // 点击事件
         button.touchUpInside = ^(SKButton *skButton){

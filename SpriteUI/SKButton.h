@@ -23,6 +23,9 @@
 
 #import "SKControl.h"
 
+// 左上角为原点，向下为Y轴正方向的一倍图坐标转SpriteKit坐标。该宏仅用于SKScene及其子类中
+#define ConvertPos(x,y)  CGPointMake(2*(x)-self.size.width/2, -2*(y)+self.size.height/2)
+
 @interface SKButton : SKControl
 
 // textLabel是SKButton的基本元素
@@ -32,6 +35,8 @@
 // 用SKSpriteNode实例化一个按钮
 - (instancetype)initWithSize:(CGSize)size andSprite:(SKSpriteNode *)spriteNode;
 - (instancetype)initWithSize:(CGSize)size andSpriteName:(NSString *)spriteName;
+- (void)setNormalImageNamed:(NSString *)normalImageNamed
+        touchDownImageNamed:(NSString *)touchDownImageNamed;
 
 
 @property (nonatomic, readonly) SKShapeNode *shapeNode;
@@ -42,5 +47,9 @@
 
 // 用字符串实例化一个文本按钮
 - (instancetype)initWithSize:(CGSize)size andText:(NSString *)text;
+
+
+- (void)setNormalBlock:(void (^)(SKButton *skButton))blockNormal
+        touchDownBlock:(void (^)(SKButton *skButton))blockTouchDown;
 
 @end
