@@ -52,6 +52,11 @@
     return self;
 }
 
+- (void)dealloc
+{
+    
+}
+
 
 #pragma mark - Override SKNode
 
