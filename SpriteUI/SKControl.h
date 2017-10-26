@@ -51,6 +51,8 @@ typedef NS_ENUM(unsigned int, SKCtrlEvent) {
 @property (nonatomic, copy) void (^touchUpOutside)(id skControl);
 @property (nonatomic, copy) void (^touchCancel)(id skControl);
 
+@property (nonatomic, copy) BOOL (^canMoveTo)(id skControl, CGPoint willPosition);
+
 
 - (instancetype)initWithSize:(CGSize)size;
 

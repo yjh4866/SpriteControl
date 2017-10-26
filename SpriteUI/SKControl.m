@@ -31,7 +31,8 @@
 @implementation SKControl {
     NSMutableDictionary *_mdicActionForEvent;
     
-    CGPoint _pointLastTouch;
+    CGPoint _posTouchDown;
+    CGPoint _posLastTouch;
 }
 
 - (instancetype)init
@@ -92,7 +93,8 @@
     CGPoint pointTouch = [touches.anyObject locationInNode:self];
     // 查看是否Touch在控件上
     if ([self containsPoint:pointTouch]) {
-        _pointLastTouch = pointTouch;
+        _posTouchDown = pointTouch;
+        _posLastTouch = pointTouch;
         // 回调的SKAction
         SKAction *callback = [SKAction runBlock:^{
             if (self.touchDown) {
@@ -113,7 +115,7 @@
     CGPoint pointTouch = [touches.anyObject locationInNode:self];
     // 查看是否Touch在控件上
     if ([self containsPoint:pointTouch]) {
-        if ([self containsPoint:_pointLastTouch]) {
+        if ([self containsPoint:_posLastTouch]) {
             // 回调的SKAction
             SKAction *callback = [SKAction runBlock:^{
                 if (self.touchDragInside) {
@@ -145,7 +147,7 @@
         }
     }
     else {
-        if ([self containsPoint:_pointLastTouch]) {
+        if ([self containsPoint:_posLastTouch]) {
             // 回调的SKAction
             SKAction *callback = [SKAction runBlock:^{
                 if (self.touchDragExit) {
@@ -176,7 +178,14 @@
             }
         }
     }
-    _pointLastTouch = pointTouch;
+    if (self.canMoveTo) {
+        CGPoint willPos = CGPointMake(self.position.x+(pointTouch.x-_posTouchDown.x),
+                                      self.position.y+(pointTouch.y-_posTouchDown.y));
+        if (self.canMoveTo(self, willPos)) {
+            self.position = willPos;
+        }
+    }
+    _posLastTouch = pointTouch;
 }
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event
 {
