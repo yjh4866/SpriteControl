@@ -21,18 +21,63 @@
 // SOFTWARE.
 
 #import "SKControl.h"
+#import <objc/runtime.h>
+#import "Aspects.h"
+
+
+@implementation SKNode (SpriteUI)
+// 下面的宏用于Sketch中的坐标转换
+#define ConvertPos(xx,yy)  CGPointMake(2*(xx)-self.scene.anchorPoint.x*self.scene.size.width, -(2*(yy)-(1-self.scene.anchorPoint.y)*self.scene.size.height))
+#define ConvertPosFromSketch(x,y,w,h) ConvertPos((x+w/2)/(self.scene.sketchSize.width/self.scene.size.width)/2, (y+h/2)/(self.scene.sketchSize.height/self.scene.size.height)/2)
+- (void)updatePosition
+{
+    if (self.scene.size.width > 0 && self.scene.size.height > 0 &&
+        self.scene.sketchSize.width > 0 && self.scene.sketchSize.height > 0) {
+        self.position = ConvertPosFromSketch(self.frameInSketch.origin.x, self.frameInSketch.origin.y, self.frameInSketch.size.width, self.frameInSketch.size.height);
+    }
+}
+static const char *SpriteUI_FrameInSketch = "SpriteUI_FrameInSketch";
+- (void)setFrameInSketch:(CGRect)frameInSketch
+{
+    objc_setAssociatedObject(self, SpriteUI_FrameInSketch, [NSValue valueWithCGRect:frameInSketch], OBJC_ASSOCIATION_ASSIGN);
+    // 当前SKNode已经被添加到SKScene，则计算其位置
+    // 否则只能等被添加到SKScene才能计算位置
+    if (self.scene) {
+        [self updatePosition];
+    }
+}
+- (CGRect)frameInSketch
+{
+    return [objc_getAssociatedObject(self, SpriteUI_FrameInSketch) CGRectValue];
+}
+- (BOOL)exitFrameInSketch
+{
+    return objc_getAssociatedObject(self, SpriteUI_FrameInSketch);
+}
+@end
 
 
 @interface SKControl ()
 @property (nonatomic, strong) SKSpriteNode *bgSprite;
 @end
 
-
 @implementation SKControl {
     NSMutableDictionary *_mdicActionForEvent;
     
     CGPoint _posTouchDown;
     CGPoint _posLastTouch;
+}
+
++ (void)load
+{
+    // 绑定SKScene方法，等SKNode添加到SKScene后再计算其位置
+    [SKScene aspect_hookSelector:@selector(addChild:) withOptions:AspectPositionAfter usingBlock:^(id<AspectInfo> info) {
+        // 设置过frameInSketch则更新其位置
+        if (info.arguments.count > 0 &&
+            [info.arguments[0] exitFrameInSketch]) {
+            [info.arguments[0] updatePosition];
+        }
+    } error:nil];
 }
 
 - (instancetype)init
@@ -178,12 +223,10 @@
             }
         }
     }
-    if (self.canMoveTo) {
+    if (self.willMoveTo) {
         CGPoint willPos = CGPointMake(self.position.x+(pointTouch.x-_posTouchDown.x),
                                       self.position.y+(pointTouch.y-_posTouchDown.y));
-        if (self.canMoveTo(self, willPos)) {
-            self.position = willPos;
-        }
+        self.position = self.willMoveTo(self, willPos);
     }
     _posLastTouch = pointTouch;
 }
@@ -239,4 +282,17 @@
     }
 }
 
+@end
+
+
+@implementation SKScene (SpriteUI)
+static const char *SpriteUI_SketchSize = "SpriteUI_SketchSize";
+- (void)setSketchSize:(CGSize)sketchSize
+{
+    objc_setAssociatedObject(self, SpriteUI_SketchSize, [NSValue valueWithCGSize:sketchSize], OBJC_ASSOCIATION_ASSIGN);
+}
+- (CGSize)sketchSize
+{
+    return [objc_getAssociatedObject(self, SpriteUI_SketchSize) CGSizeValue];
+}
 @end

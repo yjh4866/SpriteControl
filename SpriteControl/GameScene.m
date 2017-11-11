@@ -97,6 +97,10 @@
         button.touchUpInside = ^(SKButton *skButton){
             NSLog(@"TouchUpInside: %@", skButton);
         };
+        // 是否可以移动到指定位置
+        button.willMoveTo = ^CGPoint(SKControl *skControl, CGPoint willPosition) {
+            return CGPointMake(willPosition.x, skControl.position.y);
+        };
         [self addChild:button];
     }
     
@@ -118,8 +122,8 @@
             NSLog(@"TouchUpInside: %@", skButton);
         };
         // 是否可以移动到指定位置
-        button.canMoveTo = ^BOOL(id skControl, CGPoint willPosition) {
-            return YES;
+        button.willMoveTo = ^CGPoint(SKControl *skControl, CGPoint willPosition) {
+            return CGPointMake(skControl.position.x, willPosition.y);
         };
         [self addChild:button];
     }

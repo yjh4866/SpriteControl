@@ -23,8 +23,6 @@
 
 #import "SKControl.h"
 
-// 左上角为原点，向下为Y轴正方向的一倍图坐标转SpriteKit坐标。该宏仅用于SKScene及其子类中
-#define ConvertPos(x,y)  CGPointMake(2*(x)-self.size.width/2, -2*(y)+self.size.height/2)
 
 @interface SKButton : SKControl
 

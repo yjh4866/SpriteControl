@@ -36,6 +36,12 @@ typedef NS_ENUM(unsigned int, SKCtrlEvent) {
 };
 
 
+@interface SKNode (SpriteUI)
+// Sketch中的位置
+@property (nonatomic, assign) CGRect frameInSketch;
+@end
+
+
 @interface SKControl : SKNode
 
 @property (nonatomic, readonly) SKSpriteNode *bgSprite;
@@ -51,7 +57,7 @@ typedef NS_ENUM(unsigned int, SKCtrlEvent) {
 @property (nonatomic, copy) void (^touchUpOutside)(id skControl);
 @property (nonatomic, copy) void (^touchCancel)(id skControl);
 
-@property (nonatomic, copy) BOOL (^canMoveTo)(id skControl, CGPoint willPosition);
+@property (nonatomic, copy) CGPoint (^willMoveTo)(SKControl *skControl, CGPoint willPosition);
 
 
 - (instancetype)initWithSize:(CGSize)size;
@@ -61,4 +67,10 @@ typedef NS_ENUM(unsigned int, SKCtrlEvent) {
 // 获取指定事件的动画
 - (SKAction *)actionOfControlEvent:(SKCtrlEvent)ctrlEvent;
 
+@end
+
+
+@interface SKScene (SpriteUI)
+// Sketch中的屏幕尺寸
+@property (nonatomic, assign) CGSize sketchSize;
 @end

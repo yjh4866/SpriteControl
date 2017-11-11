@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B13378EE1FB67BD30046A455 /* Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = B13378ED1FB67BD30046A455 /* Aspects.m */; };
 		B133EC6B1E1D2ACD00AFC65C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B133EC6A1E1D2ACD00AFC65C /* main.m */; };
 		B133EC6E1E1D2ACD00AFC65C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B133EC6D1E1D2ACD00AFC65C /* AppDelegate.m */; };
 		B133EC701E1D2ACD00AFC65C /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B133EC6F1E1D2ACD00AFC65C /* GameScene.sks */; };
@@ -20,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B13378EC1FB67BD30046A455 /* Aspects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Aspects.h; sourceTree = "<group>"; };
+		B13378ED1FB67BD30046A455 /* Aspects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Aspects.m; sourceTree = "<group>"; };
 		B133EC661E1D2ACD00AFC65C /* SpriteControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpriteControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B133EC6A1E1D2ACD00AFC65C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B133EC6C1E1D2ACD00AFC65C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -50,6 +53,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B13378EB1FB67BD30046A455 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				B13378EC1FB67BD30046A455 /* Aspects.h */,
+				B13378ED1FB67BD30046A455 /* Aspects.m */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		B133EC5D1E1D2ACD00AFC65C = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +109,7 @@
 		B133ECB11E1D2BA300AFC65C /* SpriteUI */ = {
 			isa = PBXGroup;
 			children = (
+				B13378EB1FB67BD30046A455 /* Utilities */,
 				B1D78FA31E2A3FB7002575AB /* SKControl.h */,
 				B1D78FA41E2A3FB7002575AB /* SKControl.m */,
 				B133ECB41E1D2BC100AFC65C /* SKButton.h */,
@@ -179,6 +192,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B133EC781E1D2ACD00AFC65C /* GameViewController.m in Sources */,
+				B13378EE1FB67BD30046A455 /* Aspects.m in Sources */,
 				B133EC6E1E1D2ACD00AFC65C /* AppDelegate.m in Sources */,
 				B133EC751E1D2ACD00AFC65C /* GameScene.m in Sources */,
 				B133EC6B1E1D2ACD00AFC65C /* main.m in Sources */,
