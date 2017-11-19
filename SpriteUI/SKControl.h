@@ -68,9 +68,3 @@ typedef NS_ENUM(unsigned int, SKCtrlEvent) {
 - (SKAction *)actionOfControlEvent:(SKCtrlEvent)ctrlEvent;
 
 @end
-
-
-@interface SKScene (SpriteUI)
-// Sketch中的屏幕尺寸
-@property (nonatomic, assign) CGSize sketchSize;
-@end

@@ -157,8 +157,9 @@
     self.textLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
     [self addChild:self.textLabel];
     // 各种动作动画
-    SKAction *actionShrink = [SKAction scaleTo:.85f duration:.1f];
-    SKAction *actionEnlarge = [SKAction scaleTo:1.f duration:.1f];
+    CGFloat xScale = self.xScale, yScale = self.yScale;
+    SKAction *actionShrink = [SKAction group:@[[SKAction scaleXTo:.85f*xScale duration:.1f],[SKAction scaleYTo:.85f*yScale duration:.1f]]];
+    SKAction *actionEnlarge = [SKAction group:@[[SKAction scaleXTo:xScale duration:.1f],[SKAction scaleYTo:yScale duration:.1f]]];
     [self setAction:actionShrink forControlEvent:SKCtrlEvent_TouchDown];
     [self setAction:actionEnlarge forControlEvent:SKCtrlEvent_TouchUpInside];
     [self setAction:actionEnlarge forControlEvent:SKCtrlEvent_TouchUpOutside];

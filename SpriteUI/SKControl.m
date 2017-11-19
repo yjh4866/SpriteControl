@@ -26,25 +26,25 @@
 
 
 @implementation SKNode (SpriteUI)
-// 下面的宏用于Sketch中的坐标转换
-#define ConvertPos(xx,yy)  CGPointMake(2*(xx)-self.scene.anchorPoint.x*self.scene.size.width, -(2*(yy)-(1-self.scene.anchorPoint.y)*self.scene.size.height))
-#define ConvertPosFromSketch(x,y,w,h) ConvertPos((x+w/2)/(self.scene.sketchSize.width/self.scene.size.width)/2, (y+h/2)/(self.scene.sketchSize.height/self.scene.size.height)/2)
 - (void)updatePosition
 {
-    if (self.scene.size.width > 0 && self.scene.size.height > 0 &&
-        self.scene.sketchSize.width > 0 && self.scene.sketchSize.height > 0) {
-        self.position = ConvertPosFromSketch(self.frameInSketch.origin.x, self.frameInSketch.origin.y, self.frameInSketch.size.width, self.frameInSketch.size.height);
+    if (self.parent == self.scene) {
+        self.position = CGPointMake((self.frameInSketch.origin.x+self.frameInSketch.size.width/2)-self.scene.anchorPoint.x*self.scene.size.width, -((self.frameInSketch.origin.y+self.frameInSketch.size.height/2)-(1-self.scene.anchorPoint.y)*self.scene.size.height));
+    } else {
+        self.position = CGPointMake((self.frameInSketch.origin.x+self.frameInSketch.size.width/2)-.5f*self.parent.frameInSketch.size.width, -((self.frameInSketch.origin.y+self.frameInSketch.size.height/2)-(1-.5f)*self.parent.frameInSketch.size.height));
     }
 }
+- (void)updateSize {}
 static const char *SpriteUI_FrameInSketch = "SpriteUI_FrameInSketch";
 - (void)setFrameInSketch:(CGRect)frameInSketch
 {
-    objc_setAssociatedObject(self, SpriteUI_FrameInSketch, [NSValue valueWithCGRect:frameInSketch], OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, SpriteUI_FrameInSketch, [NSValue valueWithCGRect:frameInSketch], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     // 当前SKNode已经被添加到SKScene，则计算其位置
     // 否则只能等被添加到SKScene才能计算位置
     if (self.scene) {
         [self updatePosition];
     }
+    [self updateSize];
 }
 - (CGRect)frameInSketch
 {
@@ -52,7 +52,23 @@ static const char *SpriteUI_FrameInSketch = "SpriteUI_FrameInSketch";
 }
 - (BOOL)exitFrameInSketch
 {
-    return objc_getAssociatedObject(self, SpriteUI_FrameInSketch);
+    return objc_getAssociatedObject(self, SpriteUI_FrameInSketch) != nil;
+}
+@end
+
+
+@interface SKSpriteNode (SpriteUI)
+@end
+@implementation SKSpriteNode (SpriteUI)
+- (void)updateSize
+{
+    [super updateSize];
+    if (self.texture.size.width > 0 && [self exitFrameInSketch]) {
+        self.xScale = self.frameInSketch.size.width / self.texture.size.width;
+    }
+    if (self.texture.size.height > 0 && [self exitFrameInSketch]) {
+        self.yScale = self.frameInSketch.size.height / self.texture.size.height;
+    }
 }
 @end
 
@@ -75,7 +91,16 @@ static const char *SpriteUI_FrameInSketch = "SpriteUI_FrameInSketch";
         // 设置过frameInSketch则更新其位置
         if (info.arguments.count > 0 &&
             [info.arguments[0] exitFrameInSketch]) {
-            [info.arguments[0] updatePosition];
+            NSMutableArray *marrNode = [NSMutableArray arrayWithObject:info.arguments[0]];
+            while (marrNode.count > 0) {
+                SKNode *node = marrNode[0];
+                if ([node exitFrameInSketch]) {
+                    [node updatePosition];
+                }
+                [marrNode removeObjectAtIndex:0];
+                //
+                [marrNode addObjectsFromArray:node.children];
+            }
         }
     } error:nil];
 }
@@ -282,17 +307,4 @@ static const char *SpriteUI_FrameInSketch = "SpriteUI_FrameInSketch";
     }
 }
 
-@end
-
-
-@implementation SKScene (SpriteUI)
-static const char *SpriteUI_SketchSize = "SpriteUI_SketchSize";
-- (void)setSketchSize:(CGSize)sketchSize
-{
-    objc_setAssociatedObject(self, SpriteUI_SketchSize, [NSValue valueWithCGSize:sketchSize], OBJC_ASSOCIATION_ASSIGN);
-}
-- (CGSize)sketchSize
-{
-    return [objc_getAssociatedObject(self, SpriteUI_SketchSize) CGSizeValue];
-}
 @end
