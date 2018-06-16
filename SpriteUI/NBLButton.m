@@ -1,47 +1,25 @@
-// The MIT License (MIT)
 //
-// Copyright (c) 2015-2016 NBL ( https://github.com/yjh4866/SpriteControl )
+//  NBLButton.m
+//  
 //
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
+//  Created by GangX_yangjh on 2018/4/22.
+//  Copyright © 2018年 SiSiKJ. All rights reserved.
 //
-// The above copyright notice and this permission notice shall be included in all
-// copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-// SOFTWARE.
 
-#import "SKButton.h"
+#import "NBLButton.h"
 
-
-@interface SKButton ()
+@interface NBLButton ()
 @property (nonatomic, strong) SKSpriteNode *spriteNode;
 @property (nonatomic, strong) SKShapeNode *shapeNode;
 @property (nonatomic, strong) SKLabelNode *textLabel;
 @end
 
-
-@implementation SKButton
+@implementation NBLButton
 
 - (instancetype)init
 {
-    return [[SKButton alloc] initWithSize:CGSizeMake(100, 100) andSprite:nil];
+    return [[NBLButton alloc] initWithSize:CGSizeMake(100, 100) andSprite:nil];
 }
-
-- (void)dealloc
-{
-    
-}
-
 
 // 用SKSpriteNode实例化一个按钮
 - (instancetype)initWithSize:(CGSize)size andSprite:(SKSpriteNode *)spriteNode
@@ -79,10 +57,10 @@
 - (void)setNormalImageNamed:(NSString *)normalImageNamed
         touchDownImageNamed:(NSString *)touchDownImageNamed
 {
-    [self setNormalBlock:^(SKButton *skButton){
-        skButton.spriteNode.texture = [SKTexture textureWithImageNamed:normalImageNamed];
-    } touchDownBlock:^(SKButton *skButton){
-        skButton.spriteNode.texture = [SKTexture textureWithImageNamed:touchDownImageNamed];
+    [self setNormalBlock:^(NBLButton *nblButton){
+        nblButton.spriteNode.texture = [SKTexture textureWithImageNamed:normalImageNamed];
+    } touchDownBlock:^(NBLButton *nblButton){
+        nblButton.spriteNode.texture = [SKTexture textureWithImageNamed:touchDownImageNamed];
     }];
 }
 
@@ -135,14 +113,14 @@
 }
 
 
-- (void)setNormalBlock:(void (^)(SKButton *skButton))blockNormal
-        touchDownBlock:(void (^)(SKButton *skButton))blockTouchDown
+- (void)setNormalBlock:(void (^)(NBLButton *nblButton))blockNormal
+        touchDownBlock:(void (^)(NBLButton *nblButton))blockTouchDown
 {
     __weak typeof(self) weakSelf = self;
     [self setAction:[SKAction runBlock:^{if(blockTouchDown)blockTouchDown(weakSelf);}]
-    forControlEvent:SKCtrlEvent_TouchDown];
-    [self setAction:[SKAction runBlock:^{if(blockNormal)blockNormal(weakSelf);}] forControlEvent:SKCtrlEvent_TouchUpInside];
-    [self setAction:[SKAction runBlock:^{if(blockNormal)blockNormal(weakSelf);}] forControlEvent:SKCtrlEvent_TouchUpOutside];
+    forControlEvent:NBLCtrlEvent_TouchDown];
+    [self setAction:[SKAction runBlock:^{if(blockNormal)blockNormal(weakSelf);}] forControlEvent:NBLCtrlEvent_TouchUpInside];
+    [self setAction:[SKAction runBlock:^{if(blockNormal)blockNormal(weakSelf);}] forControlEvent:NBLCtrlEvent_TouchUpOutside];
 }
 
 
@@ -160,10 +138,10 @@
     CGFloat xScale = self.xScale, yScale = self.yScale;
     SKAction *actionShrink = [SKAction group:@[[SKAction scaleXTo:.85f*xScale duration:.1f],[SKAction scaleYTo:.85f*yScale duration:.1f]]];
     SKAction *actionEnlarge = [SKAction group:@[[SKAction scaleXTo:xScale duration:.1f],[SKAction scaleYTo:yScale duration:.1f]]];
-    [self setAction:actionShrink forControlEvent:SKCtrlEvent_TouchDown];
-    [self setAction:actionEnlarge forControlEvent:SKCtrlEvent_TouchUpInside];
-    [self setAction:actionEnlarge forControlEvent:SKCtrlEvent_TouchUpOutside];
-    [self setAction:actionEnlarge forControlEvent:SKCtrlEvent_TouchCancel];
+    [self setAction:actionShrink forControlEvent:NBLCtrlEvent_TouchDown];
+    [self setAction:actionEnlarge forControlEvent:NBLCtrlEvent_TouchUpInside];
+    [self setAction:actionEnlarge forControlEvent:NBLCtrlEvent_TouchUpOutside];
+    [self setAction:actionEnlarge forControlEvent:NBLCtrlEvent_TouchCancel];
 }
 
 @end

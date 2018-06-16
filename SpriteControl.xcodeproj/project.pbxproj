@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B13378EE1FB67BD30046A455 /* Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = B13378ED1FB67BD30046A455 /* Aspects.m */; };
 		B133EC6B1E1D2ACD00AFC65C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B133EC6A1E1D2ACD00AFC65C /* main.m */; };
 		B133EC6E1E1D2ACD00AFC65C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B133EC6D1E1D2ACD00AFC65C /* AppDelegate.m */; };
 		B133EC701E1D2ACD00AFC65C /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B133EC6F1E1D2ACD00AFC65C /* GameScene.sks */; };
@@ -16,13 +15,11 @@
 		B133EC7B1E1D2ACD00AFC65C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B133EC791E1D2ACD00AFC65C /* Main.storyboard */; };
 		B133EC7D1E1D2ACD00AFC65C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B133EC7C1E1D2ACD00AFC65C /* Assets.xcassets */; };
 		B133EC801E1D2ACD00AFC65C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B133EC7E1E1D2ACD00AFC65C /* LaunchScreen.storyboard */; };
-		B133ECB91E1D2BC100AFC65C /* SKButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B133ECB51E1D2BC100AFC65C /* SKButton.m */; };
-		B1D78FA51E2A3FB7002575AB /* SKControl.m in Sources */ = {isa = PBXBuildFile; fileRef = B1D78FA41E2A3FB7002575AB /* SKControl.m */; };
+		B1739A9E20D5460F002819F6 /* NBLButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B1739A9A20D5460F002819F6 /* NBLButton.m */; };
+		B1739A9F20D5460F002819F6 /* NBLControl.m in Sources */ = {isa = PBXBuildFile; fileRef = B1739A9D20D5460F002819F6 /* NBLControl.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B13378EC1FB67BD30046A455 /* Aspects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Aspects.h; sourceTree = "<group>"; };
-		B13378ED1FB67BD30046A455 /* Aspects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Aspects.m; sourceTree = "<group>"; };
 		B133EC661E1D2ACD00AFC65C /* SpriteControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpriteControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B133EC6A1E1D2ACD00AFC65C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B133EC6C1E1D2ACD00AFC65C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -36,10 +33,10 @@
 		B133EC7C1E1D2ACD00AFC65C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B133EC7F1E1D2ACD00AFC65C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B133EC811E1D2ACD00AFC65C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B133ECB41E1D2BC100AFC65C /* SKButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKButton.h; sourceTree = "<group>"; };
-		B133ECB51E1D2BC100AFC65C /* SKButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKButton.m; sourceTree = "<group>"; };
-		B1D78FA31E2A3FB7002575AB /* SKControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKControl.h; sourceTree = "<group>"; };
-		B1D78FA41E2A3FB7002575AB /* SKControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKControl.m; sourceTree = "<group>"; };
+		B1739A9A20D5460F002819F6 /* NBLButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBLButton.m; sourceTree = "<group>"; };
+		B1739A9B20D5460F002819F6 /* NBLButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBLButton.h; sourceTree = "<group>"; };
+		B1739A9C20D5460F002819F6 /* NBLControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBLControl.h; sourceTree = "<group>"; };
+		B1739A9D20D5460F002819F6 /* NBLControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBLControl.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,15 +50,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B13378EB1FB67BD30046A455 /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				B13378EC1FB67BD30046A455 /* Aspects.h */,
-				B13378ED1FB67BD30046A455 /* Aspects.m */,
-			);
-			path = Utilities;
-			sourceTree = "<group>";
-		};
 		B133EC5D1E1D2ACD00AFC65C = {
 			isa = PBXGroup;
 			children = (
@@ -109,11 +97,10 @@
 		B133ECB11E1D2BA300AFC65C /* SpriteUI */ = {
 			isa = PBXGroup;
 			children = (
-				B13378EB1FB67BD30046A455 /* Utilities */,
-				B1D78FA31E2A3FB7002575AB /* SKControl.h */,
-				B1D78FA41E2A3FB7002575AB /* SKControl.m */,
-				B133ECB41E1D2BC100AFC65C /* SKButton.h */,
-				B133ECB51E1D2BC100AFC65C /* SKButton.m */,
+				B1739A9B20D5460F002819F6 /* NBLButton.h */,
+				B1739A9A20D5460F002819F6 /* NBLButton.m */,
+				B1739A9C20D5460F002819F6 /* NBLControl.h */,
+				B1739A9D20D5460F002819F6 /* NBLControl.m */,
 			);
 			path = SpriteUI;
 			sourceTree = "<group>";
@@ -191,13 +178,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1739A9F20D5460F002819F6 /* NBLControl.m in Sources */,
 				B133EC781E1D2ACD00AFC65C /* GameViewController.m in Sources */,
-				B13378EE1FB67BD30046A455 /* Aspects.m in Sources */,
 				B133EC6E1E1D2ACD00AFC65C /* AppDelegate.m in Sources */,
 				B133EC751E1D2ACD00AFC65C /* GameScene.m in Sources */,
 				B133EC6B1E1D2ACD00AFC65C /* main.m in Sources */,
-				B133ECB91E1D2BC100AFC65C /* SKButton.m in Sources */,
-				B1D78FA51E2A3FB7002575AB /* SKControl.m in Sources */,
+				B1739A9E20D5460F002819F6 /* NBLButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
